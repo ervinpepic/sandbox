@@ -7,22 +7,32 @@ import { Customer } from './../Customer';
     selector: 'sandbox',
     template: `
         <h1>Hello World</h1>
-        <!--
-        <!-- 3 ways to bind properties -->
-        <div><img src="{{ imageUrl }}"></div>
-        <div><img [src]="imageUrl"></div>
-        <div><img bind-src="imageUrl"></div>
-        <h4>Image Location: <span [textContent]="imageUrl"></span></h4>
-        -->
-        <hr>
-
-        <h2>Create Post</h2>
-        <p [hidden]="isUnchanged">Post has been changed please save changes</p>
-        <button [disabled]="isUnchanged">Save</button>
-    `
+        <h4 [class.special]="isSpecial">This class binding is special</h4>
+        <h4 [ngClass]="currentClasses">This Div is initialy special and savable</h4>
+    `,
+    styles:[`
+    .special {
+           color:green;
+    }
+    .savable{
+        text-transform: uppercase;
+    }
+    `]
 })
 
 export class SandboxComponent {
-    imageUrl: string = 'http://lorempixel.com/400/200';
-    isUnchanged: boolean = true;
+    isSpecial = true;
+    canSave = true;
+    currentClasses = {};
+
+    constructor() {
+        this.setCurrentClasses();
+    }
+
+    setCurrentClasses() {
+        this.currentClasses = {
+            savable: this.canSave,
+            special: this.isSpecial
+        }
+    }
 }   
