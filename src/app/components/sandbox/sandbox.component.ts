@@ -5,39 +5,48 @@ import { Customer } from './../Customer';
 
 @Component({
     selector: 'sandbox',
-    templateUrl: `./sandbox.component.html`,
-    styleUrls: ['./sandbox.component.css']
-    // styles: [`
-    //     .special {
-    //         color: green;
-    //         font-size:20px;
-    //         text-transofrm: uppercase
-    //     }
-    // `]
+    template: `
+        <h1>Hello World</h1> 
+        {{ people }}
+
+        <ul>
+            <li *ngFor="let person of people">
+                {{ person }}
+            </li>
+        </ul>
+
+        <ul>
+            <li *ngFor="let person of people; let i = index">
+                {{i + 1}} {{ person }}
+            </li>
+        </ul>
+
+        <ul>
+        <li *ngFor="let person of people2">
+            {{ person.firstName }}
+        </li>
+    </ul>
+    `
 })
 
 export class SandboxComponent {
-    customer: Customer;
-    customers: Customer[];
+    people = ['Ervin', 'Emel', 'Emil', 'Izet'];
+    people2 = [
+        {
+            firstName: 'Ervin',
+            lastName: 'Pepic'
+        },
+        {
+            firstName: 'Emel',
+            lastName: 'Pepic'
+        },
+        {
+            firstName: 'Ines',
+            lastName: 'Pepic'
+        }
+    ];
 
     constructor() {
-        this.customer = {
-            id: 1,
-            name: 'Ervin Pepic',
-            email: 'ervin.hack@gmail.com'
-        }
-
-        this.customers = [
-            {
-                id: 2,
-                name: 'Emel Pepic',
-                email: 'pepic.emel@gmail.com'
-            },
-            {
-                id: 3,
-                name: 'Erna Pepic',
-                email: 'ernapepic@gmail.com'
-            }
-        ];
+        this.people[2] = 'PEPA';
     }
 }
