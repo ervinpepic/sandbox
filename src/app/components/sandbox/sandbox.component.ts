@@ -1,10 +1,19 @@
 import { Component } from '@angular/core';
 
-import { Customer } from './Customer';
+import { Customer } from './../Customer';
+
 
 @Component({
     selector: 'sandbox',
-    template: `<h1>Hello World {{ customer.name }}</h1>`
+    templateUrl: `./sandbox.component.html`,
+    styleUrls: ['./sandbox.component.css']
+    // styles: [`
+    //     .special {
+    //         color: green;
+    //         font-size:20px;
+    //         text-transofrm: uppercase
+    //     }
+    // `]
 })
 
 export class SandboxComponent {
