@@ -5,27 +5,19 @@ import { Customer } from './../Customer';
 
 @Component({
     selector: 'sandbox',
-    template: `
-        <h1>Hello World</h1>
-        <div [style.font-size]="isSpecial ? 'x-large' : 'smaller'">Font Size depends on special property</div>
-
-        <div [ngStyle]="currentStyles">This div is initialy saveable & special</div>
+    template: `<h1>Hello World</h1>
+        <p>My b {{ birthday | date | uppercase }}</p>
+        <p>My bdate {{ birthday | date:"MM-dd--yy" }}</p>
+        <p>Bron in {{ birthday | date: "yyyy" }}</p>
+        <p>I love {{ 'cake' | uppercase }}</p>
+        <p>I love {{ 'CATS' | lowercase }}</p>
+        <p>Your total is {{ total | currency: "EUR" }}</p>
+        <p>Your fee {{ fee | percent }}</p>
     `
 })
 
 export class SandboxComponent {
-    isSpecial = true;
-    canSave = true;
-    currentStyles = {};
-
-    constructor() {
-        this.setCurrentStyles();
-    }
-
-    setCurrentStyles() {
-        this.currentStyles = {
-            'font-style': this.canSave ? 'italic' : 'normal',
-            'font-size': this.isSpecial ? '24px' : '12px'
-        }
-    }
+   birthday = new Date(1993, 10, 21);
+   total:number = 500;
+   fee: number = 0.1;
 }   
