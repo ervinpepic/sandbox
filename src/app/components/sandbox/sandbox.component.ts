@@ -6,31 +6,23 @@ import { Customer } from './../Customer';
 @Component({
     selector: 'sandbox',
     template: `
-        <h1>Hello 
+        <h1>Hello World</h1>
         <!--
-        <span *ngIf="showName"> {{ name }} </span>
-        <span *ngIf="!showName"> World </span>-->
-
-        <span *ngIf="showName; else noName"> {{ name }} </span>
-        <ng-template #noName>World</ng-template>
-
-        <p>Hello {{ showName ? name : 'World' }}</p>
+        <!-- 3 ways to bind properties -->
+        <div><img src="{{ imageUrl }}"></div>
+        <div><img [src]="imageUrl"></div>
+        <div><img bind-src="imageUrl"></div>
+        <h4>Image Location: <span [textContent]="imageUrl"></span></h4>
+        -->
         <hr>
-        <div [ngSwitch]="greeting">
-            <div *ngSwitchCase="'1'">Hello Wolrd</div>
-            <div *ngSwitchCase="'2'">Hello Pepa</div>
-            <div *ngSwitchCase="'3'">Hello Emel</div>
-            <div *ngSwitchDefault>Helloooooo</div>
-        </div>
-        </h1>
-        
 
-
+        <h2>Create Post</h2>
+        <p [hidden]="isUnchanged">Post has been changed please save changes</p>
+        <button [disabled]="isUnchanged">Save</button>
     `
 })
 
 export class SandboxComponent {
-    name: string = 'Ervin';
-    showName: boolean = false;
-    greeting: number = 10;
-}
+    imageUrl: string = 'http://lorempixel.com/400/200';
+    isUnchanged: boolean = true;
+}   
