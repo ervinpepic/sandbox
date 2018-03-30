@@ -6,47 +6,31 @@ import { Customer } from './../Customer';
 @Component({
     selector: 'sandbox',
     template: `
-        <h1>Hello World</h1> 
-        {{ people }}
+        <h1>Hello 
+        <!--
+        <span *ngIf="showName"> {{ name }} </span>
+        <span *ngIf="!showName"> World </span>-->
 
-        <ul>
-            <li *ngFor="let person of people">
-                {{ person }}
-            </li>
-        </ul>
+        <span *ngIf="showName; else noName"> {{ name }} </span>
+        <ng-template #noName>World</ng-template>
 
-        <ul>
-            <li *ngFor="let person of people; let i = index">
-                {{i + 1}} {{ person }}
-            </li>
-        </ul>
+        <p>Hello {{ showName ? name : 'World' }}</p>
+        <hr>
+        <div [ngSwitch]="greeting">
+            <div *ngSwitchCase="'1'">Hello Wolrd</div>
+            <div *ngSwitchCase="'2'">Hello Pepa</div>
+            <div *ngSwitchCase="'3'">Hello Emel</div>
+            <div *ngSwitchDefault>Helloooooo</div>
+        </div>
+        </h1>
+        
 
-        <ul>
-        <li *ngFor="let person of people2">
-            {{ person.firstName }}
-        </li>
-    </ul>
+
     `
 })
 
 export class SandboxComponent {
-    people = ['Ervin', 'Emel', 'Emil', 'Izet'];
-    people2 = [
-        {
-            firstName: 'Ervin',
-            lastName: 'Pepic'
-        },
-        {
-            firstName: 'Emel',
-            lastName: 'Pepic'
-        },
-        {
-            firstName: 'Ines',
-            lastName: 'Pepic'
-        }
-    ];
-
-    constructor() {
-        this.people[2] = 'PEPA';
-    }
+    name: string = 'Ervin';
+    showName: boolean = false;
+    greeting: number = 10;
 }
