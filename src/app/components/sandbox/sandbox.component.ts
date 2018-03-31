@@ -12,10 +12,29 @@ import { Customer } from './../Customer';
 
                 <h1 class="mb-5 mt-5">Hello World</h1>
             
-                <form (submit)="onSubmit()">
+                <form novalidate #f="ngForm" (ngSubmit)="onSubmit(f)">
                     <div class="form-group">
                         <label>Name</label>
-                        <input type="text" class="form-control" [(ngModel)]="name" name="name">
+                        <input type="text" class="form-control" [(ngModel)]="user.name" name="name" #userName="ngModel" minlength="2" required >
+                        <div *ngIf="userName.errors?.required && userName.touched" class="alert alert-warning">Name is required</div>
+                        <div *ngIf="userName.errors?.minlength && userName.touched" class="alert alert-warning">Name should be at least two characters long</div>
+                    </div>
+                    <div class="form-group">
+                        <label>Eamil</label>
+                        <input type="email" class="form-control" [(ngModel)]="user.email" name="email" #userEmail="ngModel" required>
+                        <div *ngIf="userEmail.errors?.required && userEmail.touched" class="alert alert-warning">You must enter an email</div>
+                    </div>
+                    <div class="form-group">
+                        <label>Phone</label>
+                        <input 
+                            type="text" 
+                            class="form-control" 
+                            [(ngModel)]="user.phone" 
+                            name="name" 
+                            #userPhone="ngModel" 
+                            minlength="8" 
+                        >
+                        <div *ngIf="userPhone.errors?.minlength && userPhone.touched" class="alert alert-warning">Enter a valid phone number</div>
                     </div>
                     <input type="submit" value="Submit" class="btn btn-success">
                 </form>   
@@ -30,13 +49,18 @@ import { Customer } from './../Customer';
 })
 
 export class SandboxComponent {
-    name: string = '';
-    users: string[] = ['Ervin', 'Emel', 'Erna', 'Hido'];
-    
-    onSubmit() {
-        this.users.push(this.name);
-        this.name = '';
-
-
+    user = {
+        name: '',
+        email: '',
+        phone: ''
     }
+
+    onSubmit({value, valid}) {
+        if(valid){
+            console.log(value);
+        } else {
+            console.log('Form is invalid');
+        }
+    }
+ 
 }   
