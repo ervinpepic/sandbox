@@ -5,19 +5,21 @@ import { Customer } from './../Customer';
 
 @Component({
     selector: 'sandbox',
-    template: `<h1>Hello World</h1>
-        <p>My b {{ birthday | date | uppercase }}</p>
-        <p>My bdate {{ birthday | date:"MM-dd--yy" }}</p>
-        <p>Bron in {{ birthday | date: "yyyy" }}</p>
-        <p>I love {{ 'cake' | uppercase }}</p>
-        <p>I love {{ 'CATS' | lowercase }}</p>
-        <p>Your total is {{ total | currency: "EUR" }}</p>
-        <p>Your fee {{ fee | percent }}</p>
+    template: `
+        <h1>Hello World</h1>
+        <button (click)="fireEvent($event, 'Hello')">Click Event</button>
+        <button (mouseover)="fireEvent($event)">Mouse over</button>
+        <button (mousedown)="fireEvent($event)">Mouse down</button>
+        <button (mouseup)="fireEvent($event)">Mouse up</button>
+        <button (dblclick)="fireEvent($event)">Double click</button>
+        <button (drag)="fireEvent($event)">Drag</button>
     `
 })
 
 export class SandboxComponent {
-   birthday = new Date(1993, 10, 21);
-   total:number = 500;
-   fee: number = 0.1;
+
+    fireEvent(e) {
+        // console.log('Button Clicked');
+        console.log(e.type);
+    }
 }   
