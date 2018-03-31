@@ -7,19 +7,20 @@ import { Customer } from './../Customer';
     selector: 'sandbox',
     template: `
         <h1>Hello World</h1>
-        <button (click)="fireEvent($event, 'Hello')">Click Event</button>
-        <button (mouseover)="fireEvent($event)">Mouse over</button>
-        <button (mousedown)="fireEvent($event)">Mouse down</button>
-        <button (mouseup)="fireEvent($event)">Mouse up</button>
-        <button (dblclick)="fireEvent($event)">Double click</button>
-        <button (drag)="fireEvent($event)">Drag</button>
+        <button (click)="changeValue()">Change Value</button>
+        <div *ngIf="value">
+            <h1>{{ text }}</h1>
+        </div>
     `
 })
 
 export class SandboxComponent {
+    text: string = 'Hello World';
+    value: boolean = true;
 
-    fireEvent(e) {
-        // console.log('Button Clicked');
-        console.log(e.type);
+    changeValue(){
+        // this.value = false;
+        this.value = !this.value;
     }
+
 }   
