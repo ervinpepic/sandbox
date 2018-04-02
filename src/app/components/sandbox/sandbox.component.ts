@@ -7,18 +7,21 @@ import { DataService } from './../../services/data.service';
 @Component({
     selector: 'sandbox',
     template: `
-        <h1 class"mb-5 mt-5">Hello World</h1>
+        <h1>Hello World</h1>
         <ul class="list-group">
-            <li class="list-group-item" *ngFor="let user of users">{{ user }}</li>
+            <li class="list-group-item" *ngFor="let d of data">{{ d }}</li>
         </ul>
     `
 
 })
 
 export class SandboxComponent {
-    users: string[];
+    data: any[] = [];
     constructor(public dataService: DataService) {
-       this.users = this.dataService.getUsers();
+       this.dataService.getData().subscribe(podaci => {
+        //    console.log(podaci);
+        this.data.push(podaci);
+       });
     }
  
 }   
