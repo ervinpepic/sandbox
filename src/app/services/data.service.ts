@@ -20,4 +20,9 @@ export class DataService {
         return this.htrquest.post('http://jsonplaceholder.typicode.com/users', korisnikDodaj)
         .map(odgovor => odgovor.json());
     }
+
+    deleteUser(id) {
+        return this.htrquest.delete('http://jsonplaceholder.typicode.com/users/' + id)
+        .map(odgovor => odgovor.json());
+    }
 }
