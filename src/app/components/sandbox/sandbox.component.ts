@@ -8,7 +8,7 @@ import { DataService } from './../../services/data.service';
     selector: 'sandbox',
     template: `
             <div class="container">
-            <h1>Hello World</h1>
+            <h1 class="text-center mt-5 mb-5">Hello World</h1>
         
                 <div class="row">
                     <div class="col">
