@@ -7,46 +7,51 @@ import { DataService } from './../../services/data.service';
 @Component({
     selector: 'sandbox',
     template: `
-
             <div class="container">
             <h1>Hello World</h1>
-            <div class="row">
-
-            <div class="col-md-6">
-                <form (submit)="onSubmit(isEdit)">
-                <div class="form-group">
-                    <label>Name</label>
-                    <input type="text" class="form-control" [(ngModel)]="user.name" name="name">
+        
+                <div class="row">
+                    <div class="col">
+                
+                        <form (submit)="onSubmit(isEdit)">
+                        <div class="form-group">
+                            <label>Name</label>
+                            <input type="text" class="form-control" [(ngModel)]="user.name" name="name">
+                        </div>
+                        <div class="form-group">
+                            <label>Email</label>
+                            <input type="text" class="form-control" [(ngModel)]="user.email" name="email">
+                        </div>
+                        <div class="form-group">
+                            <label>Phone</label>
+                            <input type="text" class="form-control" [(ngModel)]="user.phone" name="phone">
+                        </div>
+                        <input type="submit" class="btn btn-success" value="Submit">
+                        </form>
+                
+                    </div>
+                
+                
+                    <div class="col">
+                        <div *ngFor="let user of users">
+                        <div class="well">
+                            <ul class="list-group">
+                            <li class="list-group-item mb-3">
+                            Name: {{user.name}} 
+                            Email: {{user.email}} 
+                            Phone: {{user.phone}}
+                            <span><button class="btn btn-danger btn-sm float-right ml-1" (click)="onDelete(user.id)">Delete</button></span>
+                            <span><button class="btn btn-primary btn-sm float-right" (click)="onEdit(user)">Edit</button></span>
+                            </li>
+                            
+                            </ul>
+                           
+                        </div>
+                        </div>
+                    </div>
                 </div>
-                <div class="form-group">
-                    <label>Email</label>
-                    <input type="text" class="form-control" [(ngModel)]="user.email" name="email">
-                </div>
-                <div class="form-group">
-                    <label>Phone</label>
-                    <input type="text" class="form-control" [(ngModel)]="user.phone" name="phone">
-                </div>
-                <input type="submit" class="btn btn-success"  value="Submit">
-                </form>
-            </div>
-            </div>
-
-            <div class="row">
-            <div class="col-md-6">
-                <div *ngFor="let user of users">
-                <div class="well">
-                    <ul class="list-group">
-                    <li class="list-group-item">Name: {{user.name}} email: {{user.email}} phone: {{user.phone}}</li>
-                    <button class="btn btn-primary btn-sm" (click)="onEdit(user)">Edit</button>
-                    <button class="btn btn-danger btn-sm" (click)="onDelete(user.id)">Delete</button>
-                    </ul>
-                   
-                </div>
-                </div>
-            </div>
-            </div>
-
-            </div>
+        
+        </div>
     `
 
 })
