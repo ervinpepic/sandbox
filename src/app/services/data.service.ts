@@ -16,4 +16,8 @@ export class DataService {
             .map(odgovor => odgovor.json());
     }
 
+    addUser(korisnikDodaj) {
+        return this.htrquest.post('http://jsonplaceholder.typicode.com/users', korisnikDodaj)
+        .map(odgovor => odgovor.json());
+    }
 }
