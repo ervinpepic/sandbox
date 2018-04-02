@@ -13,7 +13,7 @@ import { DataService } from './../../services/data.service';
             <div class="row">
 
             <div class="col-md-6">
-                <form (submit)="onSubmit()">
+                <form (submit)="onSubmit(isEdit)">
                 <div class="form-group">
                     <label>Name</label>
                     <input type="text" class="form-control" [(ngModel)]="user.name" name="name">
@@ -37,6 +37,7 @@ import { DataService } from './../../services/data.service';
                 <div class="well">
                     <ul class="list-group">
                     <li class="list-group-item">Name: {{user.name}} email: {{user.email}} phone: {{user.phone}}</li>
+                    <button class="btn btn-primary btn-sm" (click)="onEdit(user)">Edit</button>
                     <button class="btn btn-danger btn-sm" (click)="onDelete(user.id)">Delete</button>
                     </ul>
                    
@@ -52,11 +53,15 @@ import { DataService } from './../../services/data.service';
 
 export class SandboxComponent {
     users: any[];
+
     user = {
+        id: '',
         name: '',
         email: '',
         phone: ''
     }
+    isEdit: boolean = false;
+
     constructor(public dataService: DataService) {
         this.dataService.getUsers().subscribe(korisnici => {
             // console.log(korisnici);
@@ -64,12 +69,25 @@ export class SandboxComponent {
         });
     }
 
-    onSubmit() {
-        this.dataService.addUser(this.user).subscribe(korisnikDodaj => {
-            console.log(korisnikDodaj);
-            this.users.unshift(korisnikDodaj);
+    onSubmit(isEdit) {
+        if (isEdit) {
+            this.dataService.updateUser(this.user).subscribe(korisnik => {
+                for(let i = 0; i < this.users.length; i++) {
+                    if(this.users[i].id == this.user.id) {
+                        this.users.splice(i,1);
+                    }            
+                }
+                
+            });
+        } else {
+            this.dataService.addUser(this.user).subscribe(korisnikDodaj => {
+                console.log(korisnikDodaj);
+                this.users.unshift(korisnikDodaj);
+            });
+        }
+        
             
-        });
+       
         
 
     }
@@ -85,5 +103,10 @@ export class SandboxComponent {
         });
     }
 
+    onEdit(korisnik) {
+        this.isEdit = true;
+        this.user = korisnik;
     }
+
+}
  
